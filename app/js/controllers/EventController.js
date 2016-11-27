@@ -3,13 +3,17 @@
 eventsApp.controller('EventController',
     function EventController($scope, eventData) {
 
-        //$scope.snippet = '<span style="color:red;">Hi there!</span>';
-
-        $scope.mystyle = { color:'red' };
-        //$scope.myclass = "blue";
         $scope.sortorder = 'name';
 
-        $scope.event = eventData.event;
+        // We pass a callback to EventDataClassic.js
+        //$scope.event = eventData.getEvent( function(event) {
+        //    $scope.event = event;
+        //});
+
+        // EventData.js returns a promise we can use directly
+        $scope.event = eventData.getEvent();
+        console.log( "event is a promise:" );
+        console.log( $scope.event );
 
         $scope.upVoteSession = function(session) {
             session.upVoteCount++;
