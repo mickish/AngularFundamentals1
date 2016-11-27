@@ -10,10 +10,15 @@ eventsApp.controller('EventController',
         //    $scope.event = event;
         //});
 
-        // EventData.js returns a promise we can use directly
+        // EventDataPromise.js returns a promise that the view can use directly
+        //$scope.event = eventData.getEvent();
+
+        // This style installs callbacks on the promise
         $scope.event = eventData.getEvent();
-        console.log( "event is a promise:" );
-        console.log( $scope.event );
+        $scope.event.then(
+            function(event) {console.log(event); },
+            function(response) {console.log(response); }
+        );
 
         $scope.upVoteSession = function(session) {
             session.upVoteCount++;
